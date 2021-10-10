@@ -1,0 +1,41 @@
+---
+- name: Apply base prometheus exporter role
+  ansible.builtin.include_role:
+    name: prometheus_exporter
+    public: true
+  vars:
+    exporter_name: blackbox_exporter
+
+- block:
+    - name: Enable blackbox_exporter ICMP probe
+      community.general.capabilities:
+        path: "{{ exporter_bin_dir }}/{{ exporter_binary }}"
+        capability: cap_net_raw=ep
+        state: present
+      notify: restart {{ exporter_service }}
+
+    - name: Create blackbox_exporter configuration directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ blackbox_exporter_config_file | basename }}"
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+
+    - name: Add blackbox_exporter configuration
+      ansible.builtin.template:
+        src: config.yml
+        dest: "{{ blackbox_exporter_config_file }}"
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
+      notify: restart {{ exporter_service }}
+  when: exporter_install | bool
+
+- name: Register blackbox_exporter probe targets
+  ansible.builtin.include_tasks:
+    file: probe.yml
+  loop: "{{ blackbox_exporter_probe_targets | dict2items }}"
+  loop_control:
+    loop_var: _probe_targets
+    label: "{{ _probe_targets.key }}"

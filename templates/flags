@@ -1,0 +1,11 @@
+#jinja2: trim_blocks: "false", lstrip_blocks: "true"
+{% for k,v in blackbox_exporter_extra_flags | dictsort %}
+  {% if v == "" %}
+--{{ k }} \
+  {% else %}
+--{{ k }}={{ v | quote }} \
+  {% endif %}
+{% endfor %}
+--log.level="{{ blackbox_exporter_log_level }}" \
+--config.file="{{ blackbox_exporter_config_file }}" \
+--web.listen-address="{{ blackbox_exporter_listen }}"

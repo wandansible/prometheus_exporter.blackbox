@@ -1,0 +1,25 @@
+#jinja2: trim_blocks: "false", lstrip_blocks: "true"
+---
+# {{ ansible_managed }}
+
+{% macro targets_block(_targets, _labels) %}
+- targets:
+  {% for _target in _targets %}
+    - {{ _target }}
+  {% endfor %}
+  {% if _labels != [] %}
+  labels:
+    {{ _labels | to_nice_yaml(indent=2) | indent(4, false) | trim }}
+  {% endif %}
+{% endmacro %}
+{% if targets[0] is string %}
+  {% set _targets = targets %}
+  {% set _labels = exporter_labels %}
+{{ targets_block(_targets, _labels) | trim }}
+{% else %}
+  {% for t in targets %}
+    {% set _targets = t.targets %}
+    {% set _labels = t.labels if t.labels is defined else exporter_labels %}
+{{ targets_block(_targets, _labels) | trim }}
+  {% endfor %}
+{% endif %}
