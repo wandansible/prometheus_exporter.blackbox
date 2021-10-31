@@ -17,7 +17,7 @@
     - name: Create blackbox_exporter configuration directory
       ansible.builtin.file:
         state: directory
-        path: "{{ blackbox_exporter_config_file | basename }}"
+        path: "{{ blackbox_exporter_config_file | dirname }}"
         owner: root
         group: root
         mode: u=rwx,g=rx,o=rx
