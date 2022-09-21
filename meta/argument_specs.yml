@@ -1,0 +1,213 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure Blackbox Exporter for Prometheus
+    options:
+      blackbox_exporter_extra_flags:
+        description: Extra flags to run exporter with
+        type: dict
+
+      blackbox_exporter_listen:
+        description: Listen address and port
+        type: str
+        default: localhost:9115
+
+      blackbox_exporter_log_level:
+        description: Only log messages with the given severity or above
+        type: str
+        default: warn
+        choices:
+          - debug
+          - info
+          - warn
+          - error
+
+      blackbox_exporter_config_file:
+        description: Path for configuration file
+        type: str
+        default: /etc/blackbox_exporter/config.yml
+
+      blackbox_exporter_probe_targets:
+        description: Endpoints for an external blackbox exporter server to target
+        type: list
+        elements: dict
+        options:
+          type:
+            description: Probe type or protocol
+            type: str
+            required: true
+          targets:
+            description: Targets and labels
+            type: list
+            elements: dict
+            required: true
+            options:
+              targets:
+                description: Endpoints to target
+                type: list
+                elements: str
+                required: true
+              labels:
+                description: Labels added to metrics (defaults to blackbox_exporter_labels)
+                type: dict
+
+      blackbox_exporter_file_sd_probe_dir:
+        description: Directory, on scrape servers, for the file service discovery probe targets
+        type: str
+        default: /etc/prometheus/file_sd/blackbox_exporter/probe
+
+      blackbox_exporter_modules:
+        description: |
+          Configuration for modules to enable,
+          see https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
+        type: dict
+
+      blackbox_exporter_port:
+        description: Listen port
+        type: int
+        default: 9115
+
+      blackbox_exporter_file_sd_dir:
+        description: Directory, on scrape servers, for the file service discovery target
+        type: str
+        default: /etc/prometheus/file_sd/blackbox_exporter
+
+      blackbox_exporter_scrape_servers:
+        description: |
+          List of servers that scrape exporter metrics from the host,
+          overrides prometheus_scrape_servers
+        type: list
+        elements: str
+
+      blackbox_exporter_labels:
+        description: |
+          Labels added to exporter metrics,
+          overrides prometheus_labels
+        type: dict
+
+      blackbox_exporter_install:
+        description: If true, install exporter
+        type: bool
+        default: false
+
+      blackbox_exporter_configure_caddy:
+        description: If true, configure caddy to add a TLS endpoint for the exporter
+        type: bool
+        default: false
+
+      blackbox_exporter_register:
+        description: If true, register the exporter with the scrape servers
+        type: bool
+        default: false
+
+      blackbox_exporter_user:
+        description: Name of the exporter unix user
+        type: str
+
+      blackbox_exporter_group:
+        description: Name of the exporter unix group
+        type: str
+
+      blackbox_exporter_groups:
+        description: Unix groups added to exporter unix user
+        type: list
+        elements: str
+
+      blackbox_exporter_manage_user:
+        description: If true, add exporter unix user and group
+        type: bool
+        default: true
+
+      blackbox_exporter_bin_dir:
+        description: Directory for the exporter executable
+        type: str
+
+      blackbox_exporter_src_dir:
+        description: Directory for the exporter downloads
+        type: str
+
+      blackbox_exporter_add_extract_dir:
+        description: If true, add an extraction directory for the exporter package
+        type: bool
+        default: false
+
+      blackbox_exporter_git_org:
+        description: Name of organisation for exporter git repository
+        type: str
+
+      blackbox_exporter_git_repo:
+        description: Name of exporter git repository
+        type: str
+
+      blackbox_exporter_latest_url:
+        description: URL for the latest version
+        type: str
+
+      blackbox_exporter_version:
+        description: Version to install (use "latest" for the latest version)
+        type: str
+        default: latest
+
+      blackbox_exporter_version_regex:
+        description: Regular expression for capturing the version from the latest tag
+        type: str
+
+      blackbox_exporter_tag:
+        description: Version git tag
+        type: str
+
+      blackbox_exporter_package_name:
+        description: Name of the exporter package
+        type: str
+
+      blackbox_exporter_package:
+        description: Filename of the exporter package (without extension)
+        type: str
+
+      blackbox_exporter_arch_map:
+        description: Mapping of the possible values of ansible_architecture to the exporter package architectures
+        type: dict
+
+      blackbox_exporter_package_url:
+        description: URL for the exporter package
+        type: str
+
+      blackbox_exporter_package_dir:
+        description: Directory the exporter package is extracted to
+        type: str
+
+      blackbox_exporter_binary:
+        description: Filename for the exporter executable
+        type: str
+
+      blackbox_exporter_checksums_url:
+        description: URL for the exporter package checksums
+        type: str
+
+      blackbox_exporter_checksums_file:
+        description: Filename for the exporter package checksums
+        type: str
+
+      blackbox_exporter_checksum_type:
+        description: The exporter package checksum type
+        type: str
+
+      blackbox_exporter_checksum:
+        description: The exporter package checksum
+        type: str
+
+      blackbox_exporter_service:
+        description: Name of the exporter systemd service
+        type: str
+
+      blackbox_exporter_description:
+        description: Description for the exporter systemd service
+        type: str
+
+      blackbox_exporter_flags:
+        description: Contents or list of flags to run exporter with
+        type: raw
+
+      blackbox_exporter_target:
+        description: Scrape target hostname and port
+        type: str
