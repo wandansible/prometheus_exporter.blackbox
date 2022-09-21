@@ -43,6 +43,7 @@
         group: root
         mode: u=rw,g=r,o=r
       notify: restart {{ exporter_service }}
+      when: blackbox_exporter_modules != {}
   when: exporter_install | bool
 
 - name: Register blackbox_exporter probe targets

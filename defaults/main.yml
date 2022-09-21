@@ -12,3 +12,4 @@ blackbox_exporter_register: false
 
 blackbox_exporter_probe_targets: {}
 blackbox_exporter_file_sd_probe_dir: /etc/prometheus/file_sd/blackbox_exporter/probe
+blackbox_exporter_modules: {}
