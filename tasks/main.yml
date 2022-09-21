@@ -48,7 +48,6 @@
 - name: Register blackbox_exporter probe targets
   ansible.builtin.include_tasks:
     file: probe.yml
-  loop: "{{ blackbox_exporter_probe_targets | dict2items }}"
+  loop: "{{ blackbox_exporter_probe_targets }}"
   loop_control:
-    loop_var: _probe_targets
-    label: "{{ _probe_targets.key }}"
+    label: "{{ item.type }}"
