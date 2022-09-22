@@ -1,22 +1,24 @@
 ---
-- name: Create blackbox_exporter service discovery probe directory ({{ _probe_targets.key }})
+- name: Create blackbox_exporter service discovery probe directory ({{ item.type }})
   ansible.builtin.file:
-    path: "{{ blackbox_exporter_file_sd_probe_dir }}/{{ _probe_targets.key }}"
+    path: "{{ blackbox_exporter_file_sd_probe_dir }}/{{ item.type }}"
     state: directory
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
-  delegate_to: "{{ item }}"
+  delegate_to: "{{ _scrape_server }}"
   loop: "{{ exporter_scrape_servers }}"
+  loop_control:
+    loop_var: _scrape_server
 
-- name: Register blackbox_exporter probe targets ({{ _probe_targets.key }})
+- name: Register blackbox_exporter probe targets ({{ item.type }})
   ansible.builtin.template:
     src: targets.yml
-    dest: "{{ blackbox_exporter_file_sd_probe_dir }}/{{ _probe_targets.key }}/{{ inventory_hostname }}.yml"
+    dest: "{{ blackbox_exporter_file_sd_probe_dir }}/{{ item.type }}/{{ inventory_hostname }}.yml"
     owner: root
     group: root
     mode: u=rw,g=r,o=r
-  delegate_to: "{{ item }}"
+  delegate_to: "{{ _scrape_server }}"
   loop: "{{ exporter_scrape_servers }}"
-  vars:
-    targets: "{{ _probe_targets.value }}"
+  loop_control:
+    loop_var: _scrape_server

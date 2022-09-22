@@ -2,24 +2,11 @@
 ---
 # {{ ansible_managed }}
 
-{% macro targets_block(_targets, _labels) %}
-- targets:
-  {% for _target in _targets %}
-    - {{ _target }}
-  {% endfor %}
-  {% if _labels != [] %}
-  labels:
-    {{ _labels | to_nice_yaml(indent=2) | indent(4, false) | trim }}
+{% for target in item.targets %}
+  {% if target.labels is defined %}
+    {% set labels = target.labels %}
+  {% else %}
+    {% set labels = exporter_labels %}
   {% endif %}
-{% endmacro %}
-{% if targets[0] is string %}
-  {% set _targets = targets %}
-  {% set _labels = exporter_labels %}
-{{ targets_block(_targets, _labels) | trim }}
-{% else %}
-  {% for t in targets %}
-    {% set _targets = t.targets %}
-    {% set _labels = t.labels if t.labels is defined else exporter_labels %}
-{{ targets_block(_targets, _labels) | trim }}
-  {% endfor %}
-{% endif %}
+- {{ {"targets": target.targets, "labels": labels} | to_nice_yaml(indent=2) | indent(2, false) }}
+{% endfor %}
