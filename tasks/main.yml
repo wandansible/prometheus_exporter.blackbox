@@ -1,8 +1,7 @@
 ---
 - name: Apply base prometheus exporter role
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: prometheus_exporter
-    public: true
 
 - block:
     - name: Enable blackbox_exporter ICMP probe (libcap2 < 2.41)
