@@ -3,6 +3,12 @@ Ansible role: Prometheus Exporter - Blackbox
 
 Install and configure Blackbox Exporter for Prometheus.
 
+Requirements
+------------
+
+This role depends on the [base prometheus exporter role](https://github.com/wandansible/prometheus_exporter).
+
+
 Role Variables
 --------------
 
