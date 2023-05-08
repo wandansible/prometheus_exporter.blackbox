@@ -2,14 +2,10 @@
 blackbox_exporter_port: 9115
 blackbox_exporter_listen_addresses:
   - "localhost:{{ blackbox_exporter_port }}"
-blackbox_exporter_config_file: /etc/blackbox_exporter/config.yml
+blackbox_exporter_config_file: /etc/prometheus/exporters/blackbox/config.yml
 blackbox_exporter_flags: "{{ lookup('template', 'flags') }}"
 blackbox_exporter_extra_flags: {}
 blackbox_exporter_log_level: warn
-
-blackbox_exporter_install: false
-blackbox_exporter_configure_caddy: false
-blackbox_exporter_register: false
 
 blackbox_exporter_probe_targets: []
 blackbox_exporter_file_sd_probe_dir: /etc/prometheus/file_sd/blackbox_exporter/probe

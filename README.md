@@ -17,16 +17,16 @@ ENTRY POINT: main - Install and configure Blackbox Exporter for Prometheus
 
 OPTIONS (= is mandatory):
 
-- blackbox_exporter_add_extract_dir
-        If true, add an extraction directory for the exporter package
-        default: false
-        type: bool
-
 - blackbox_exporter_arch_map
         Mapping of the possible values of ansible_architecture to the
         exporter package architectures
         default: null
         type: dict
+
+- blackbox_exporter_archive_url
+        Override the URL for the exporter archive file
+        default: null
+        type: str
 
 - blackbox_exporter_bin_dir
         Directory for the exporter executable
@@ -43,24 +43,30 @@ OPTIONS (= is mandatory):
         default: null
         type: str
 
+- blackbox_exporter_checksum_file
+        Filename for the exporter package checksums
+        default: null
+        type: str
+
 - blackbox_exporter_checksum_type
         The exporter package checksum type
         default: null
         type: str
 
-- blackbox_exporter_checksums_file
-        Filename for the exporter package checksums
+- blackbox_exporter_checksum_url
+        Override the URL for the exporter checksum file
         default: null
         type: str
 
-- blackbox_exporter_checksums_url
-        URL for the exporter package checksums
-        default: null
-        type: str
+- blackbox_exporter_clean_src_dir
+        Remove old downloaded archive files from exporter src
+        directory
+        default: true
+        type: bool
 
 - blackbox_exporter_config_file
         Path for configuration file
-        default: /etc/blackbox_exporter/config.yml
+        default: /etc/prometheus/exporters/blackbox/config.yml
         type: str
 
 - blackbox_exporter_configure_caddy
@@ -127,11 +133,6 @@ OPTIONS (= is mandatory):
         default: null
         type: dict
 
-- blackbox_exporter_latest_url
-        URL for the latest version
-        default: null
-        type: str
-
 - blackbox_exporter_listen_addresses
         Listen address and port
         default: ['localhost:9115']
@@ -154,26 +155,6 @@ OPTIONS (= is mandatory):
         ometheus/blackbox_exporter/blob/master/CONFIGURATION.md
         default: null
         type: dict
-
-- blackbox_exporter_package
-        Filename of the exporter package (without extension)
-        default: null
-        type: str
-
-- blackbox_exporter_package_dir
-        Directory the exporter package is extracted to
-        default: null
-        type: str
-
-- blackbox_exporter_package_name
-        Name of the exporter package
-        default: null
-        type: str
-
-- blackbox_exporter_package_url
-        URL for the exporter package
-        default: null
-        type: str
 
 - blackbox_exporter_port
         Listen port
@@ -228,14 +209,14 @@ OPTIONS (= is mandatory):
         type: str
 
 - blackbox_exporter_src_dir
-        Directory for the exporter downloads
+        Directory for the downloaded exporter src archive
         default: null
         type: str
 
-- blackbox_exporter_tag
-        Version git tag
-        default: null
-        type: str
+- blackbox_exporter_strip_components
+        Strip NUMBER leading components from file names on extraction
+        default: 1
+        type: int
 
 - blackbox_exporter_target
         Scrape target hostname and port
@@ -250,12 +231,6 @@ OPTIONS (= is mandatory):
 - blackbox_exporter_version
         Version to install (use "latest" for the latest version)
         default: latest
-        type: str
-
-- blackbox_exporter_version_regex
-        Regular expression for capturing the version from the latest
-        tag
-        default: null
         type: str
 ```
 
