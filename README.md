@@ -132,10 +132,11 @@ OPTIONS (= is mandatory):
         default: null
         type: str
 
-- blackbox_exporter_listen
+- blackbox_exporter_listen_addresses
         Listen address and port
-        default: localhost:9115
-        type: str
+        default: ['localhost:9115']
+        elements: str
+        type: list
 
 - blackbox_exporter_log_level
         Only log messages with the given severity or above

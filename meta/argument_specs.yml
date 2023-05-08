@@ -7,10 +7,11 @@ argument_specs:
         description: Extra flags to run exporter with
         type: dict
 
-      blackbox_exporter_listen:
+      blackbox_exporter_listen_addresses:
         description: Listen address and port
-        type: str
-        default: localhost:9115
+        type: list
+        elements: str
+        default: ['localhost:9115']
 
       blackbox_exporter_log_level:
         description: Only log messages with the given severity or above
