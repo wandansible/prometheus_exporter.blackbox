@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: "Install getcap/setcap"
+      ansible.builtin.apt:
+        pkg:
+          - "libcap2-bin"

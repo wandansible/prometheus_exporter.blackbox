@@ -7,10 +7,11 @@ argument_specs:
         description: Extra flags to run exporter with
         type: dict
 
-      blackbox_exporter_listen:
+      blackbox_exporter_listen_addresses:
         description: Listen address and port
-        type: str
-        default: localhost:9115
+        type: list
+        elements: str
+        default: ['localhost:9115']
 
       blackbox_exporter_log_level:
         description: Only log messages with the given severity or above
@@ -25,7 +26,7 @@ argument_specs:
       blackbox_exporter_config_file:
         description: Path for configuration file
         type: str
-        default: /etc/blackbox_exporter/config.yml
+        default: /etc/prometheus/exporters/blackbox/config.yml
 
       blackbox_exporter_probe_targets:
         description: Endpoints for an external blackbox exporter server to target
@@ -88,7 +89,7 @@ argument_specs:
       blackbox_exporter_install:
         description: If true, install exporter
         type: bool
-        default: false
+        default: true
 
       blackbox_exporter_configure_caddy:
         description: If true, configure caddy to add a TLS endpoint for the exporter
@@ -123,13 +124,18 @@ argument_specs:
         type: str
 
       blackbox_exporter_src_dir:
-        description: Directory for the exporter downloads
+        description: Directory for the downloaded exporter src archive
         type: str
 
-      blackbox_exporter_add_extract_dir:
-        description: If true, add an extraction directory for the exporter package
+      blackbox_exporter_strip_components:
+        description: Strip NUMBER leading components from file names on extraction
+        type: int
+        default: 1
+
+      blackbox_exporter_clean_src_dir:
+        description: Remove old downloaded archive files from exporter src directory
         type: bool
-        default: false
+        default: true
 
       blackbox_exporter_git_org:
         description: Name of organisation for exporter git repository
@@ -139,8 +145,8 @@ argument_specs:
         description: Name of exporter git repository
         type: str
 
-      blackbox_exporter_latest_url:
-        description: URL for the latest version
+      blackbox_exporter_archive_url:
+        description: Override the URL for the exporter archive file
         type: str
 
       blackbox_exporter_version:
@@ -148,43 +154,21 @@ argument_specs:
         type: str
         default: latest
 
-      blackbox_exporter_version_regex:
-        description: Regular expression for capturing the version from the latest tag
-        type: str
-
-      blackbox_exporter_tag:
-        description: Version git tag
-        type: str
-
-      blackbox_exporter_package_name:
-        description: Name of the exporter package
-        type: str
-
-      blackbox_exporter_package:
-        description: Filename of the exporter package (without extension)
-        type: str
-
       blackbox_exporter_arch_map:
-        description: Mapping of the possible values of ansible_architecture to the exporter package architectures
+        description: |
+          Mapping of the possible values of ansible_architecture
+          to the exporter package architectures
         type: dict
-
-      blackbox_exporter_package_url:
-        description: URL for the exporter package
-        type: str
-
-      blackbox_exporter_package_dir:
-        description: Directory the exporter package is extracted to
-        type: str
 
       blackbox_exporter_binary:
         description: Filename for the exporter executable
         type: str
 
-      blackbox_exporter_checksums_url:
-        description: URL for the exporter package checksums
+      blackbox_exporter_checksum_url:
+        description: Override the URL for the exporter checksum file
         type: str
 
-      blackbox_exporter_checksums_file:
+      blackbox_exporter_checksum_file:
         description: Filename for the exporter package checksums
         type: str
 

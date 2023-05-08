@@ -17,170 +17,153 @@ ENTRY POINT: main - Install and configure Blackbox Exporter for Prometheus
 
 OPTIONS (= is mandatory):
 
-- blackbox_exporter_add_extract_dir
-        If true, add an extraction directory for the exporter package
-        [Default: False]
-        type: bool
-
 - blackbox_exporter_arch_map
         Mapping of the possible values of ansible_architecture to the
         exporter package architectures
-        [Default: (null)]
+        default: null
         type: dict
+
+- blackbox_exporter_archive_url
+        Override the URL for the exporter archive file
+        default: null
+        type: str
 
 - blackbox_exporter_bin_dir
         Directory for the exporter executable
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_binary
         Filename for the exporter executable
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_checksum
         The exporter package checksum
-        [Default: (null)]
+        default: null
+        type: str
+
+- blackbox_exporter_checksum_file
+        Filename for the exporter package checksums
+        default: null
         type: str
 
 - blackbox_exporter_checksum_type
         The exporter package checksum type
-        [Default: (null)]
+        default: null
         type: str
 
-- blackbox_exporter_checksums_file
-        Filename for the exporter package checksums
-        [Default: (null)]
+- blackbox_exporter_checksum_url
+        Override the URL for the exporter checksum file
+        default: null
         type: str
 
-- blackbox_exporter_checksums_url
-        URL for the exporter package checksums
-        [Default: (null)]
-        type: str
+- blackbox_exporter_clean_src_dir
+        Remove old downloaded archive files from exporter src
+        directory
+        default: true
+        type: bool
 
 - blackbox_exporter_config_file
         Path for configuration file
-        [Default: /etc/blackbox_exporter/config.yml]
+        default: /etc/prometheus/exporters/blackbox/config.yml
         type: str
 
 - blackbox_exporter_configure_caddy
         If true, configure caddy to add a TLS endpoint for the
         exporter
-        [Default: False]
+        default: false
         type: bool
 
 - blackbox_exporter_description
         Description for the exporter systemd service
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_extra_flags
         Extra flags to run exporter with
-        [Default: (null)]
+        default: null
         type: dict
 
 - blackbox_exporter_file_sd_dir
         Directory, on scrape servers, for the file service discovery
         target
-        [Default: /etc/prometheus/file_sd/blackbox_exporter]
+        default: /etc/prometheus/file_sd/blackbox_exporter
         type: str
 
 - blackbox_exporter_file_sd_probe_dir
         Directory, on scrape servers, for the file service discovery
         probe targets
-        [Default: /etc/prometheus/file_sd/blackbox_exporter/probe]
+        default: /etc/prometheus/file_sd/blackbox_exporter/probe
         type: str
 
 - blackbox_exporter_flags
         Contents or list of flags to run exporter with
-        [Default: (null)]
+        default: null
         type: raw
 
 - blackbox_exporter_git_org
         Name of organisation for exporter git repository
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_git_repo
         Name of exporter git repository
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_group
         Name of the exporter unix group
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_groups
         Unix groups added to exporter unix user
-        [Default: (null)]
+        default: null
         elements: str
         type: list
 
 - blackbox_exporter_install
         If true, install exporter
-        [Default: False]
+        default: false
         type: bool
 
 - blackbox_exporter_labels
         Labels added to exporter metrics, overrides prometheus_labels
-        [Default: (null)]
+        default: null
         type: dict
 
-- blackbox_exporter_latest_url
-        URL for the latest version
-        [Default: (null)]
-        type: str
-
-- blackbox_exporter_listen
+- blackbox_exporter_listen_addresses
         Listen address and port
-        [Default: localhost:9115]
-        type: str
+        default: ['localhost:9115']
+        elements: str
+        type: list
 
 - blackbox_exporter_log_level
         Only log messages with the given severity or above
-        (Choices: debug, info, warn, error)[Default: warn]
+        choices: [debug, info, warn, error]
+        default: warn
         type: str
 
 - blackbox_exporter_manage_user
         If true, add exporter unix user and group
-        [Default: True]
+        default: true
         type: bool
 
 - blackbox_exporter_modules
         Configuration for modules to enable, see https://github.com/pr
         ometheus/blackbox_exporter/blob/master/CONFIGURATION.md
-        [Default: (null)]
+        default: null
         type: dict
-
-- blackbox_exporter_package
-        Filename of the exporter package (without extension)
-        [Default: (null)]
-        type: str
-
-- blackbox_exporter_package_dir
-        Directory the exporter package is extracted to
-        [Default: (null)]
-        type: str
-
-- blackbox_exporter_package_name
-        Name of the exporter package
-        [Default: (null)]
-        type: str
-
-- blackbox_exporter_package_url
-        URL for the exporter package
-        [Default: (null)]
-        type: str
 
 - blackbox_exporter_port
         Listen port
-        [Default: 9115]
+        default: 9115
         type: int
 
 - blackbox_exporter_probe_targets
         Endpoints for an external blackbox exporter server to target
-        [Default: (null)]
+        default: null
         elements: dict
         type: list
 
@@ -188,7 +171,6 @@ OPTIONS (= is mandatory):
 
         = targets
             Targets and labels
-
             elements: dict
             type: list
 
@@ -197,66 +179,58 @@ OPTIONS (= is mandatory):
             - labels
                 Labels added to metrics (defaults to
                 blackbox_exporter_labels)
-                [Default: (null)]
+                default: null
                 type: dict
 
             = targets
                 Endpoints to target
-
                 elements: str
                 type: list
 
         = type
             Probe type or protocol
-
             type: str
 
 - blackbox_exporter_register
         If true, register the exporter with the scrape servers
-        [Default: False]
+        default: false
         type: bool
 
 - blackbox_exporter_scrape_servers
         List of servers that scrape exporter metrics from the host,
         overrides prometheus_scrape_servers
-        [Default: (null)]
+        default: null
         elements: str
         type: list
 
 - blackbox_exporter_service
         Name of the exporter systemd service
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_src_dir
-        Directory for the exporter downloads
-        [Default: (null)]
+        Directory for the downloaded exporter src archive
+        default: null
         type: str
 
-- blackbox_exporter_tag
-        Version git tag
-        [Default: (null)]
-        type: str
+- blackbox_exporter_strip_components
+        Strip NUMBER leading components from file names on extraction
+        default: 1
+        type: int
 
 - blackbox_exporter_target
         Scrape target hostname and port
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_user
         Name of the exporter unix user
-        [Default: (null)]
+        default: null
         type: str
 
 - blackbox_exporter_version
         Version to install (use "latest" for the latest version)
-        [Default: latest]
-        type: str
-
-- blackbox_exporter_version_regex
-        Regular expression for capturing the version from the latest
-        tag
-        [Default: (null)]
+        default: latest
         type: str
 ```
 
