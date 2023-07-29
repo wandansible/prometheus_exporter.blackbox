@@ -6,3 +6,8 @@
       ansible.builtin.apt:
         pkg:
           - "libcap2-bin"
+
+    - name: "Install sysctl"
+      ansible.builtin.apt:
+        pkg:
+          - "procps"
