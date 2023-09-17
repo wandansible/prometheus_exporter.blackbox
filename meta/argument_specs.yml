@@ -59,9 +59,10 @@ argument_specs:
 
       blackbox_exporter_modules:
         description: |
-          Configuration for modules to enable,
-          see https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
-        type: dict
+          Configuration for blackbox modules, as a string or dict.
+          For more information see
+            https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
+        type: raw
 
       blackbox_exporter_port:
         description: Listen port

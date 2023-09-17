@@ -158,10 +158,12 @@ OPTIONS (= is mandatory):
         type: bool
 
 - blackbox_exporter_modules
-        Configuration for modules to enable, see https://github.com/pr
-        ometheus/blackbox_exporter/blob/master/CONFIGURATION.md
+        Configuration for blackbox modules, as a string or dict.
+        For more information
+        see   https://github.com/prometheus/blackbox_exporter/blob/mas
+        ter/CONFIGURATION.md
         default: null
-        type: dict
+        type: raw
 
 - blackbox_exporter_port
         Listen port
