@@ -1,0 +1,43 @@
+---
+blackbox_exporter_default_modules_http:
+  - name: http_2xx
+    config:
+      prober: http
+      http:
+        fail_if_ssl: true
+        fail_if_not_ssl: false
+
+  - name: https_2xx
+    config:
+      prober: http
+      http:
+        fail_if_ssl: false
+        fail_if_not_ssl: true
+
+  - name: https_401
+    config:
+      prober: http
+      http:
+        valid_status_codes: [401]
+        fail_if_ssl: false
+        fail_if_not_ssl: true
+
+  - name: https_403
+    config:
+      prober: http
+      http:
+        valid_status_codes: [403]
+        fail_if_ssl: false
+        fail_if_not_ssl: true
+
+  - name: https_redir
+    config:
+      prober: http
+      http:
+        valid_status_codes: [301, 302, 308]
+        follow_redirects: false
+        fail_if_header_not_matches:
+          - header: Location
+            regexp: https://(.+)
+        fail_if_ssl: true
+        fail_if_not_ssl: false

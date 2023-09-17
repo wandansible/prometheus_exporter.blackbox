@@ -72,6 +72,229 @@ OPTIONS (= is mandatory):
         default: false
         type: bool
 
+- blackbox_exporter_default_modules
+        Default modules to configure for blackbox exporter. Defaults
+        to a combination of blackbox_exporter_default_modules_http,
+        blackbox_exporter_default_modules_icmp and
+        blackbox_exporter_default_modules_tcp. For more information
+        see   https://github.com/prometheus/blackbox_exporter/blob/mas
+        ter/CONFIGURATION.md
+        default: null
+        elements: dict
+        type: list
+
+        OPTIONS:
+
+        = config
+            Blackbox module configuration
+            type: dict
+
+            OPTIONS:
+
+            - dns
+                Specific configuration for DNS prober
+                default: null
+                type: str
+
+            - grpc
+                Specific configuration for GRPC prober
+                default: null
+                type: str
+
+            - http
+                Specific configuration for HTTP prober
+                default: null
+                type: str
+
+            - icmp
+                Specific configuration for ICMP prober
+                default: null
+                type: str
+
+            = prober
+                The protocol over which the probe will take place
+                (http, tcp, dns, icmp, grpc)
+                type: str
+
+            - tcp
+                Specific configuration for TCP prober
+                default: null
+                type: str
+
+            - timeout
+                How long the probe will wait before giving up
+                default: null
+                type: str
+
+        = name
+            Blackbox module name
+            type: str
+
+- blackbox_exporter_default_modules_http
+        Default HTTP prober modules to configure for blackbox
+        exporter.  For more information see   https://github.com/prome
+        theus/blackbox_exporter/blob/master/CONFIGURATION.md
+        default: null
+        elements: dict
+        type: list
+
+        OPTIONS:
+
+        = config
+            Blackbox module configuration
+            type: dict
+
+            OPTIONS:
+
+            - dns
+                Specific configuration for DNS prober
+                default: null
+                type: str
+
+            - grpc
+                Specific configuration for GRPC prober
+                default: null
+                type: str
+
+            - http
+                Specific configuration for HTTP prober
+                default: null
+                type: str
+
+            - icmp
+                Specific configuration for ICMP prober
+                default: null
+                type: str
+
+            = prober
+                The protocol over which the probe will take place
+                (http, tcp, dns, icmp, grpc)
+                type: str
+
+            - tcp
+                Specific configuration for TCP prober
+                default: null
+                type: str
+
+            - timeout
+                How long the probe will wait before giving up
+                default: null
+                type: str
+
+        = name
+            Blackbox module name
+            type: str
+
+- blackbox_exporter_default_modules_icmp
+        Default ICMP prober modules to configure for blackbox
+        exporter.  For more information see   https://github.com/prome
+        theus/blackbox_exporter/blob/master/CONFIGURATION.md
+        default: null
+        elements: dict
+        type: list
+
+        OPTIONS:
+
+        = config
+            Blackbox module configuration
+            type: dict
+
+            OPTIONS:
+
+            - dns
+                Specific configuration for DNS prober
+                default: null
+                type: str
+
+            - grpc
+                Specific configuration for GRPC prober
+                default: null
+                type: str
+
+            - http
+                Specific configuration for HTTP prober
+                default: null
+                type: str
+
+            - icmp
+                Specific configuration for ICMP prober
+                default: null
+                type: str
+
+            = prober
+                The protocol over which the probe will take place
+                (http, tcp, dns, icmp, grpc)
+                type: str
+
+            - tcp
+                Specific configuration for TCP prober
+                default: null
+                type: str
+
+            - timeout
+                How long the probe will wait before giving up
+                default: null
+                type: str
+
+        = name
+            Blackbox module name
+            type: str
+
+- blackbox_exporter_default_modules_tcp
+        Default TCP prober modules to configure for blackbox exporter.
+        For more information see   https://github.com/prometheus/black
+        box_exporter/blob/master/CONFIGURATION.md
+        default: null
+        elements: dict
+        type: list
+
+        OPTIONS:
+
+        = config
+            Blackbox module configuration
+            type: dict
+
+            OPTIONS:
+
+            - dns
+                Specific configuration for DNS prober
+                default: null
+                type: str
+
+            - grpc
+                Specific configuration for GRPC prober
+                default: null
+                type: str
+
+            - http
+                Specific configuration for HTTP prober
+                default: null
+                type: str
+
+            - icmp
+                Specific configuration for ICMP prober
+                default: null
+                type: str
+
+            = prober
+                The protocol over which the probe will take place
+                (http, tcp, dns, icmp, grpc)
+                type: str
+
+            - tcp
+                Specific configuration for TCP prober
+                default: null
+                type: str
+
+            - timeout
+                How long the probe will wait before giving up
+                default: null
+                type: str
+
+        = name
+            Blackbox module name
+            type: str
+
 - blackbox_exporter_description
         Description for the exporter systemd service
         default: null
@@ -158,10 +381,19 @@ OPTIONS (= is mandatory):
         type: bool
 
 - blackbox_exporter_modules
-        Configuration for modules to enable, see https://github.com/pr
-        ometheus/blackbox_exporter/blob/master/CONFIGURATION.md
+        Configuration for blackbox modules, as a string or dict.
+        Defaults to a IP address family version of each module defined
+        in blackbox_exporter_default_modules.  For more information
+        see   https://github.com/prometheus/blackbox_exporter/blob/mas
+        ter/CONFIGURATION.md
         default: null
-        type: dict
+        type: raw
+
+- blackbox_exporter_modules_address_families
+        List of IP address families to configure modules for
+        default: [ip4, ip6]
+        elements: str
+        type: list
 
 - blackbox_exporter_port
         Listen port

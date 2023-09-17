@@ -1,0 +1,5 @@
+---
+blackbox_exporter_default_modules_icmp:
+  - name: icmp
+    config:
+      prober: icmp

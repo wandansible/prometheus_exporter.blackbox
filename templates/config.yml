@@ -2,4 +2,8 @@
 # {{ ansible_managed }}
 
 modules:
-  {{ blackbox_exporter_modules | to_nice_yaml(indent=2) | indent(2, false) }}
+{% if blackbox_exporter_modules is string %}
+  {{ blackbox_exporter_modules | indent(2) | trim }}
+{% elif blackbox_exporter_modules is mapping %}
+  {{ blackbox_exporter_modules | to_nice_yaml(indent=2, sort_keys=false) | indent(2) | trim }}
+{% endif %}

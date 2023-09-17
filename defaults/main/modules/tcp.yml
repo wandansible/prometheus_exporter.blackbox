@@ -1,0 +1,21 @@
+---
+blackbox_exporter_default_modules_tcp:
+  - name: tls
+    config:
+      prober: tcp
+
+  - name: ssh
+    config:
+      prober: tcp
+      tcp:
+        query_response:
+          - expect: "^SSH-2.0-"
+          - send: "SSH-2.0-blackbox-ssh-check"
+
+  - name: rsync
+    config:
+      prober: tcp
+      tcp:
+        query_response:
+          - expect: "^@RSYNCD"
+          - send: "@RSYNCD: 31.0"

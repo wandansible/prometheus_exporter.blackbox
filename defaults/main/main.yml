@@ -1,0 +1,31 @@
+---
+blackbox_exporter_github_org: prometheus
+blackbox_exporter_port: 9115
+blackbox_exporter_listen_addresses:
+  - "localhost:{{ blackbox_exporter_port }}"
+blackbox_exporter_config_file: /etc/prometheus/exporters/blackbox/config.yml
+blackbox_exporter_flags: "{{ lookup('template', 'flags') }}"
+blackbox_exporter_extra_flags: {}
+blackbox_exporter_log_level: warn
+
+blackbox_exporter_probe_targets: []
+blackbox_exporter_file_sd_probe_dir: /etc/prometheus/file_sd/blackbox_exporter/probe
+
+blackbox_exporter_default_modules: >-
+  {{ blackbox_exporter_default_modules_http +
+     blackbox_exporter_default_modules_icmp +
+     blackbox_exporter_default_modules_tcp }}
+blackbox_exporter_modules_address_families:
+  - ip4
+  - ip6
+blackbox_exporter_modules: |-
+  {% for module in blackbox_exporter_default_modules %}
+  {% set module_prober = module["config"]["prober"] %}
+  {% for ipv in blackbox_exporter_modules_address_families %}
+  {% set _ = module["config"].setdefault(module_prober, {}) %}
+  {% set _ = module["config"][module_prober].update({"preferred_ip_protocol": ipv}) %}
+  {% set _ = module["config"][module_prober].update({"ip_protocol_fallback": False}) %}
+  {{ module["name"] }}_{{ ipv }}:
+    {{ module["config"] | to_nice_yaml(indent=2, sort_keys=false) | indent(2) }}
+  {% endfor %}
+  {% endfor %}
