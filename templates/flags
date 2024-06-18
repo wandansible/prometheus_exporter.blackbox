@@ -9,5 +9,5 @@
 --log.level="{{ blackbox_exporter_log_level }}" \
 --config.file="{{ blackbox_exporter_config_file }}" \
 {% for blackbox_exporter_listen_address in blackbox_exporter_listen_addresses %}
---web.listen-address="{{ blackbox_exporter_listen_address }}" {{ '\\\\' if not loop.last }}
+--web.listen-address="{{ blackbox_exporter_listen_address }}" {{ "\\" if not loop.last }}
 {% endfor %}
