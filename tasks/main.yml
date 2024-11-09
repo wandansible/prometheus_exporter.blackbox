@@ -4,33 +4,6 @@
     name: wandansible.prometheus_exporter
 
 - block:
-    - name: Add CAP_NET_RAW capability to blackbox_exporter binary for ICMP probes (libcap2 < 2.41)
-      community.general.capabilities:
-        path: "{{ exporter_bin_dir }}/{{ exporter_binary }}"
-        capability: cap_net_raw+ep
-        state: present
-      notify: restart {{ exporter_service }}
-      when:
-        - ansible_distribution_major_version | int
-        - (ansible_distribution == 'Ubuntu' and ansible_distribution_version is version("20.04", "<="))
-          or
-          (ansible_distribution == 'Debian' and ansible_distribution_major_version is version("10", "<="))
-      register: _capabilities_old
-
-    - name: Add CAP_NET_RAW capability to blackbox_exporter binary for ICMP probes (libcap2 2.41+)
-      community.general.capabilities:
-        path: "{{ exporter_bin_dir }}/{{ exporter_binary }}"
-        capability: cap_net_raw=ep
-        state: present
-      notify: restart {{ exporter_service }}
-      when: _capabilities_old is skipped
-
-    - name: Allow all groups to send ICMP packets
-      ansible.posix.sysctl:
-        key: "net.ipv4.ping_group_range"
-        value: "0   2147483647"
-        sysctl_file: "/etc/sysctl.d/blackbox_exporter.conf"
-
     - name: Create blackbox_exporter configuration directory
       ansible.builtin.file:
         state: directory
