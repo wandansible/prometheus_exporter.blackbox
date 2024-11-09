@@ -1,13 +1,13 @@
 #jinja2: trim_blocks: "false", lstrip_blocks: "true"
-{% for k,v in blackbox_exporter_extra_flags | dictsort %}
+{% for k, v in blackbox_exporter_extra_flags | dictsort %}
   {% if v == "" %}
---{{ k }} \
+--{{ k }}
   {% else %}
---{{ k }}={{ v | quote }} \
+--{{ k }}="{{ v }}"
   {% endif %}
 {% endfor %}
---log.level="{{ blackbox_exporter_log_level }}" \
---config.file="{{ blackbox_exporter_config_file }}" \
+--log.level="{{ blackbox_exporter_log_level }}"
+--config.file="{{ blackbox_exporter_config_file }}"
 {% for blackbox_exporter_listen_address in blackbox_exporter_listen_addresses %}
---web.listen-address="{{ blackbox_exporter_listen_address }}" {{ "\\" if not loop.last }}
+--web.listen-address="{{ blackbox_exporter_listen_address }}"
 {% endfor %}
