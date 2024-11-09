@@ -4,6 +4,7 @@ blackbox_exporter_port: 9115
 blackbox_exporter_listen_addresses:
   - "localhost:{{ blackbox_exporter_port }}"
 blackbox_exporter_config_file: /etc/prometheus/exporters/blackbox/config.yml
+blackbox_exporter_service_unit_file: "{{ lookup('template', 'service') }}"
 blackbox_exporter_flags: "{{ lookup('template', 'flags') }}"
 blackbox_exporter_extra_flags: {}
 blackbox_exporter_log_level: warn
