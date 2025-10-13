@@ -17,13 +17,15 @@ ENTRY POINT: *main* - Install and configure Blackbox Exporter for Prometheus
 
 Options (= indicates it is required):
 
-- blackbox_exporter_arch_map  Mapping of the possible values of ansible_architecture to the
-                               exporter package architectures
+- blackbox_exporter_arch_map  Mapping of the possible values of
+                               ansible_architecture to the exporter
+                               package architectures
           default: null
           type: dict
 
-- blackbox_exporter_archive_urls  Override the list of exporter archive urls for different platforms
-                                   and architectures
+- blackbox_exporter_archive_urls  Override the list of exporter
+                                   archive urls for different
+                                   platforms and architectures
           default: null
           elements: str
           type: list
@@ -40,15 +42,18 @@ Options (= indicates it is required):
           default: null
           type: str
 
-- blackbox_exporter_checksum_url  Override the URL for the exporter checksum file
+- blackbox_exporter_checksum_url  Override the URL for the exporter
+                                   checksum file
           default: null
           type: str
 
-- blackbox_exporter_checksums  Override exporter archive checksums file contents
+- blackbox_exporter_checksums  Override exporter archive checksums
+                                file contents
           default: null
           type: str
 
-- blackbox_exporter_clean_src_dir  Remove old downloaded archive files from exporter src directory
+- blackbox_exporter_clean_src_dir  Remove old downloaded archive
+                                    files from exporter src directory
           default: true
           type: bool
 
@@ -56,11 +61,13 @@ Options (= indicates it is required):
           default: /etc/prometheus/exporters/blackbox/config.yml
           type: str
 
-- blackbox_exporter_configure_caddy  If true, configure caddy to add a TLS endpoint for the exporter
+- blackbox_exporter_configure_caddy  If true, configure caddy to add
+                                      a TLS endpoint for the exporter
           default: false
           type: bool
 
-- blackbox_exporter_default_modules  Default modules to configure for blackbox exporter. Defaults to a
+- blackbox_exporter_default_modules  Default modules to configure for
+                                      blackbox exporter. Defaults to a
                                       combination of
                                       blackbox_exporter_default_modules_http,
                                       blackbox_exporter_default_modules_icmp
@@ -73,42 +80,44 @@ Options (= indicates it is required):
           type: list
           options:
 
-          = config            Blackbox module configuration
+          = config  Blackbox module configuration
             type: dict
             options:
 
-            - dns              Specific configuration for DNS prober
+            - dns  Specific configuration for DNS prober
               default: null
               type: str
 
-            - grpc              Specific configuration for GRPC prober
+            - grpc  Specific configuration for GRPC prober
               default: null
               type: str
 
-            - http              Specific configuration for HTTP prober
+            - http  Specific configuration for HTTP prober
               default: null
               type: str
 
-            - icmp              Specific configuration for ICMP prober
+            - icmp  Specific configuration for ICMP prober
               default: null
               type: str
 
-            = prober              The protocol over which the probe will take place (http,
-                       tcp, dns, icmp, grpc)
+            = prober  The protocol over which the probe will take
+                       place (http, tcp, dns, icmp, grpc)
               type: str
 
-            - tcp              Specific configuration for TCP prober
+            - tcp  Specific configuration for TCP prober
               default: null
               type: str
 
-            - timeout              How long the probe will wait before giving up
+            - timeout  How long the probe will wait before giving up
               default: null
               type: str
 
-          = name            Blackbox module name
+          = name  Blackbox module name
             type: str
 
-- blackbox_exporter_default_modules_http  Default HTTP prober modules to configure for blackbox exporter.
+- blackbox_exporter_default_modules_http  Default HTTP prober modules
+                                           to configure for blackbox
+                                           exporter.
                                            For more information see
                                            https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
           default: null
@@ -116,42 +125,44 @@ Options (= indicates it is required):
           type: list
           options:
 
-          = config            Blackbox module configuration
+          = config  Blackbox module configuration
             type: dict
             options:
 
-            - dns              Specific configuration for DNS prober
+            - dns  Specific configuration for DNS prober
               default: null
               type: str
 
-            - grpc              Specific configuration for GRPC prober
+            - grpc  Specific configuration for GRPC prober
               default: null
               type: str
 
-            - http              Specific configuration for HTTP prober
+            - http  Specific configuration for HTTP prober
               default: null
               type: str
 
-            - icmp              Specific configuration for ICMP prober
+            - icmp  Specific configuration for ICMP prober
               default: null
               type: str
 
-            = prober              The protocol over which the probe will take place (http,
-                       tcp, dns, icmp, grpc)
+            = prober  The protocol over which the probe will take
+                       place (http, tcp, dns, icmp, grpc)
               type: str
 
-            - tcp              Specific configuration for TCP prober
+            - tcp  Specific configuration for TCP prober
               default: null
               type: str
 
-            - timeout              How long the probe will wait before giving up
+            - timeout  How long the probe will wait before giving up
               default: null
               type: str
 
-          = name            Blackbox module name
+          = name  Blackbox module name
             type: str
 
-- blackbox_exporter_default_modules_icmp  Default ICMP prober modules to configure for blackbox exporter.
+- blackbox_exporter_default_modules_icmp  Default ICMP prober modules
+                                           to configure for blackbox
+                                           exporter.
                                            For more information see
                                            https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
           default: null
@@ -159,42 +170,44 @@ Options (= indicates it is required):
           type: list
           options:
 
-          = config            Blackbox module configuration
+          = config  Blackbox module configuration
             type: dict
             options:
 
-            - dns              Specific configuration for DNS prober
+            - dns  Specific configuration for DNS prober
               default: null
               type: str
 
-            - grpc              Specific configuration for GRPC prober
+            - grpc  Specific configuration for GRPC prober
               default: null
               type: str
 
-            - http              Specific configuration for HTTP prober
+            - http  Specific configuration for HTTP prober
               default: null
               type: str
 
-            - icmp              Specific configuration for ICMP prober
+            - icmp  Specific configuration for ICMP prober
               default: null
               type: str
 
-            = prober              The protocol over which the probe will take place (http,
-                       tcp, dns, icmp, grpc)
+            = prober  The protocol over which the probe will take
+                       place (http, tcp, dns, icmp, grpc)
               type: str
 
-            - tcp              Specific configuration for TCP prober
+            - tcp  Specific configuration for TCP prober
               default: null
               type: str
 
-            - timeout              How long the probe will wait before giving up
+            - timeout  How long the probe will wait before giving up
               default: null
               type: str
 
-          = name            Blackbox module name
+          = name  Blackbox module name
             type: str
 
-- blackbox_exporter_default_modules_tcp  Default TCP prober modules to configure for blackbox exporter.
+- blackbox_exporter_default_modules_tcp  Default TCP prober modules
+                                          to configure for blackbox
+                                          exporter.
                                           For more information see
                                           https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md
           default: null
@@ -202,42 +215,43 @@ Options (= indicates it is required):
           type: list
           options:
 
-          = config            Blackbox module configuration
+          = config  Blackbox module configuration
             type: dict
             options:
 
-            - dns              Specific configuration for DNS prober
+            - dns  Specific configuration for DNS prober
               default: null
               type: str
 
-            - grpc              Specific configuration for GRPC prober
+            - grpc  Specific configuration for GRPC prober
               default: null
               type: str
 
-            - http              Specific configuration for HTTP prober
+            - http  Specific configuration for HTTP prober
               default: null
               type: str
 
-            - icmp              Specific configuration for ICMP prober
+            - icmp  Specific configuration for ICMP prober
               default: null
               type: str
 
-            = prober              The protocol over which the probe will take place (http,
-                       tcp, dns, icmp, grpc)
+            = prober  The protocol over which the probe will take
+                       place (http, tcp, dns, icmp, grpc)
               type: str
 
-            - tcp              Specific configuration for TCP prober
+            - tcp  Specific configuration for TCP prober
               default: null
               type: str
 
-            - timeout              How long the probe will wait before giving up
+            - timeout  How long the probe will wait before giving up
               default: null
               type: str
 
-          = name            Blackbox module name
+          = name  Blackbox module name
             type: str
 
-- blackbox_exporter_description  Description for the exporter systemd service
+- blackbox_exporter_description  Description for the exporter systemd
+                                  service
           default: null
           type: str
 
@@ -245,24 +259,31 @@ Options (= indicates it is required):
           default: null
           type: dict
 
-- blackbox_exporter_file_sd_dir  Directory, on scrape servers, for the file service discovery target
+- blackbox_exporter_file_sd_dir  Directory, on scrape servers, for
+                                  the file service discovery target
           default: /etc/prometheus/file_sd/blackbox_exporter
           type: str
 
-- blackbox_exporter_file_sd_probe_dir  Directory, on scrape servers, for the file service discovery probe
-                                        targets
+- blackbox_exporter_file_sd_probe_dir  Directory, on scrape servers,
+                                        for the file service discovery
+                                        probe targets
           default: /etc/prometheus/file_sd/blackbox_exporter/probe
           type: str
 
-- blackbox_exporter_flags  List of flags to run exporter with, as string or list
+- blackbox_exporter_flags  List of flags to run exporter with, as
+                            string or list
           default: null
           type: raw
 
-- blackbox_exporter_github_checksum_filename  Filename for the exporter package checksums file on github
+- blackbox_exporter_github_checksum_filename  Filename for the
+                                               exporter package
+                                               checksums file on
+                                               github
           default: null
           type: str
 
-- blackbox_exporter_github_org  Name of organisation for exporter github repository
+- blackbox_exporter_github_org  Name of organisation for exporter
+                                 github repository
           default: prometheus
           type: str
 
@@ -287,7 +308,8 @@ Options (= indicates it is required):
           default: true
           type: bool
 
-- blackbox_exporter_labels  Labels added to exporter metrics, overrides prometheus_labels
+- blackbox_exporter_labels  Labels added to exporter metrics,
+                             overrides prometheus_labels
           default: null
           type: dict
 
@@ -296,16 +318,19 @@ Options (= indicates it is required):
           elements: str
           type: list
 
-- blackbox_exporter_log_level  Only log messages with the given severity or above
+- blackbox_exporter_log_level  Only log messages with the given
+                                severity or above
           choices: [debug, info, warn, error]
           default: warn
           type: str
 
-- blackbox_exporter_manage_user  If true, add exporter unix user and group
+- blackbox_exporter_manage_user  If true, add exporter unix user and
+                                  group
           default: true
           type: bool
 
-- blackbox_exporter_modules  Configuration for blackbox modules, as a string or dict.
+- blackbox_exporter_modules  Configuration for blackbox modules, as a
+                              string or dict.
                               Defaults to a IP address family version
                               of each module defined in
                               blackbox_exporter_default_modules.
@@ -314,7 +339,9 @@ Options (= indicates it is required):
           default: null
           type: raw
 
-- blackbox_exporter_modules_address_families  List of IP address families to configure modules for
+- blackbox_exporter_modules_address_families  List of IP address
+                                               families to configure
+                                               modules for
           default: [ip4, ip6]
           elements: str
           type: list
@@ -323,34 +350,37 @@ Options (= indicates it is required):
           default: 9115
           type: int
 
-- blackbox_exporter_probe_targets  Endpoints for an external blackbox exporter server to target
+- blackbox_exporter_probe_targets  Endpoints for an external blackbox
+                                    exporter server to target
           default: null
           elements: dict
           type: list
           options:
 
-          = targets            Targets and labels
+          = targets  Targets and labels
             elements: dict
             type: list
             options:
 
-            - labels              Labels added to metrics (defaults to
+            - labels  Labels added to metrics (defaults to
                        blackbox_exporter_labels)
               default: null
               type: dict
 
-            = targets              Endpoints to target
+            = targets  Endpoints to target
               elements: str
               type: list
 
-          = type            Probe type or protocol
+          = type  Probe type or protocol
             type: str
 
-- blackbox_exporter_register  If true, register the exporter with the scrape servers
+- blackbox_exporter_register  If true, register the exporter with the
+                               scrape servers
           default: false
           type: bool
 
-- blackbox_exporter_scrape_servers  List of servers that scrape exporter metrics from the host,
+- blackbox_exporter_scrape_servers  List of servers that scrape
+                                     exporter metrics from the host,
                                      overrides
                                      prometheus_scrape_servers
           default: null
@@ -361,15 +391,18 @@ Options (= indicates it is required):
           default: null
           type: str
 
-- blackbox_exporter_service_unit_file  Contents of the systemd unit file for the exporter
+- blackbox_exporter_service_unit_file  Contents of the systemd unit
+                                        file for the exporter
           default: null
           type: str
 
-- blackbox_exporter_src_dir  Directory for the downloaded exporter src archive
+- blackbox_exporter_src_dir  Directory for the downloaded exporter
+                              src archive
           default: null
           type: str
 
-- blackbox_exporter_strip_components  Strip NUMBER leading components from file names on extraction
+- blackbox_exporter_strip_components  Strip NUMBER leading components
+                                       from file names on extraction
           default: 1
           type: int
 
@@ -381,7 +414,8 @@ Options (= indicates it is required):
           default: null
           type: str
 
-- blackbox_exporter_version  Version to install (use "latest" for the latest version)
+- blackbox_exporter_version  Version to install (use "latest" for the
+                              latest version)
           default: latest
           type: str
 ```
