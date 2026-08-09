@@ -336,7 +336,7 @@ argument_specs:
         type: str
         default: ""
 
-      blackbox_exporter_github_checksum_filename:
+      blackbox_exporter_checksum_filename:
         description: Filename for the exporter package checksums file on github
         type: str
 
